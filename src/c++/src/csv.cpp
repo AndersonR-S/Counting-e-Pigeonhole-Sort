@@ -76,14 +76,19 @@ void CSV::writeCSV(const std::string &filename, const std::vector<int>& newData)
     for (size_t i = 1; i < lines.size(); ++i) {
         contador = 0;
         for (size_t j = 0; j < lines[i].size(); ++j) {
-            if (lines[i][j] == ',' && contador == 3) {
-                outputFile << "," << newData[i - 1] << ",\n";
-                break;
+            if(contador > 3 && contador < 5 && lines[i][j] != ','){
+                continue;
+            }
+            else if (lines[i][j] == ',' && contador == 3) {
+                outputFile << "," << newData[i - 1];
+                contador++;
+                continue;
             } else if (lines[i][j] == ',') {
                 contador++;
             }
             outputFile << lines[i][j];
         }
+        outputFile << std::endl;
     }
 
     outputFile.close();

@@ -17,13 +17,17 @@ try:
     numeros_df = pd.DataFrame(numeros)
     numeros_df.to_csv('dataset/input.csv', index=False)
 
-    print("\nNúmeros gerados com sucesso e salvos em input_a.csv!")
+    print("\nNúmeros gerados com sucesso e salvos em input.csv!")
 
     ## Colocando o cabeçalho no arquivo output.csv
-    legenda = pd.DataFrame(columns=["python", "js", "php", "c", "c++", "java"])
-    legenda.to_csv('dataget/output.csv', index=False)
+    legenda = pd.DataFrame([["python", "js", "php", "c", "c++", "java"],
+                                    ["","","","","",""], 
+                                    ["","","","","",""],
+                                    ["","","","","",""],
+                                    ["","","","","",""]])
+    legenda.to_csv('dataget/output.csv', index=False, header=False)
 
-    print("Cabeçalho salvo com sucesso em output.csv!")
 
+    print("Geraçdo com sucesso a tabela no arquivo output.csv!")
 except Exception as e:
     print(f"Error: {e}")

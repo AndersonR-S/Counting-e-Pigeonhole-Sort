@@ -89,22 +89,22 @@ void writeCSV(const char *filename, int *newData) {
     fputs(lines[0],file);
 
     int contador;
-    for (int i = 0; i < lineCount-1; i++) {
-
-        contador= 0;
-        for(int j = 0; j < 100; j++){
-            if(lines[i+1][j]==',' && contador==2){
-
-                fprintf(file, ",%d", newData[i]);
-                fprintf(file, "%s", ",,\n");
-                break;
+    for (int i = 1; i < lineCount; ++i) {
+            contador = 0;
+            for (size_t j = 0; j < strlen(lines[i]); ++j) {
+                if (contador > 2 && contador < 4 && lines[i][j] != ',') {
+                    continue;
+                } else if (lines[i][j] == ',' && contador == 2) {
+                    fprintf(file, ",%d", newData[i - 1]);
+                    contador++;
+                    continue;
+                } else if (lines[i][j] == ',') {
+                    contador++;
+                }
+                fprintf(file, "%c", lines[i][j]);
             }
-            else if(lines[i+1][j]==','){
-                contador++;
-            }
-            fprintf(file, "%c", lines[i+1][j]);
+            //fprintf(file, "\n");
         }
-    }
 
     fclose(file);
 }

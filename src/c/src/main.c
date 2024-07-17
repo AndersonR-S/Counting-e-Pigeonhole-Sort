@@ -1,29 +1,29 @@
-#include "ordenacao.hpp"
-#include "csv.hpp"
-#include <iostream>
-#include <vector>
+#include "ordenacao.h"
+#include "csv.h"
+
 
 int main() {
-    CSV csv; // Instância da classe CSV para ler e escrever arquivos CSV
-    Ordenacao ordenacao; // Instância da classe Ordenacao para realizar as ordenações
 
-    // Leitura do arquivo CSV de entrada
-    int *input = csv.readCSV("../../dataset/input.csv");
+    int *input = readCSV("../../dataset/input.csv");
 
-    // Ordenação desordenada usando a função ordenar da classe Ordenacao
-    int *tempo_de = ordenacao.ordenar(input);
+    int *tempo_de = ordenar(input); //  Desordenado
 
-    // Ordenação usando Pigeonhole Sort (assumindo que ordenacaoPigeonhole é a função adequada)
-    input = ordenacao.ordenacaoPigeonhole(input);
+    input = ordenacaoPigeonhole(input);
 
-    // Ordenação dos números ordenados
-    int *tempo_or = ordenacao.ordenar(input);
+    int *tempo_or = ordenar(input);// Ordenado
 
-    // Criação de um vetor para armazenar os tempos a serem escritos no CSV
-    std::vector<int> tempo;
-    tempo.push_back(tempo_de[0]);
-    tempo.push_back(tempo_de[1]);
-    tempo.push_back(tempo_or[0]);
-    tempo.push_back(tempo_or[1]);
+    int *tempo = (int *)malloc(4 *sizeof(int *));
+    for(int i = 0; i < 2; i++){
+        tempo[i] = tempo_de[i];
+        tempo[i] = tempo_de[i];
 
-    // Escrita dos tempos no 
+        tempo[i+2] = tempo_or[i];
+        tempo[i+2] = tempo_or[i];
+    }
+
+    writeCSV("../../dataget/output.csv",tempo);
+
+    free(input);
+
+    return 0;
+}

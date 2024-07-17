@@ -1,14 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class Ordenacao {
 
-    public Ordenacao() {
-        // Construtor vazio
-    }
-
-    // Função de ordenação Counting Sort
-    public List<Integer> ordenacaoCounting(List<Integer> a) {
+// Função de ordenação Counting Sort
+    public Vector<Integer> ordenacaoCounting(Vector<Integer> a) {
         // Encontrar o valor máximo em a
         int maxA = 0;
         int size = a.size();
@@ -20,13 +15,17 @@ public class Ordenacao {
         }
 
         // Passo 1: Contagem das ocorrências dos elementos
-        List<Integer> c = new ArrayList<>(maxA + 1);
+        Vector<Integer> c = new Vector<>(maxA + 1);
         for (int i = 0; i <= maxA; i++) {
             c.add(0);
         }
+
         for (int i = 0; i < size; i++) {
-            c.set(a.get(i), c.get(a.get(i)) + 1);
+            int index = a.get(i); // Obtém o valor a[i]
+            int currentValue = c.get(index); // Obtém o valor atual no índice correspondente a a[i]
+            c.set(index, currentValue + 1); // Incrementa o contador para o valor a[i]
         }
+
 
         // Passo 2: Determinação das posições finais
         for (int i = 1; i <= maxA; i++) {
@@ -34,7 +33,12 @@ public class Ordenacao {
         }
 
         // Passo 3: Construção do array ordenado
-        List<Integer> b = new ArrayList<>(size);
+        Vector<Integer> b = new Vector<>(size);
+
+        for (int i = 0; i < size; i++) {
+            b.add(0);
+        }
+        
         for (int i = size - 1; i >= 0; i--) {
             b.set(c.get(a.get(i)) - 1, a.get(i));
             c.set(a.get(i), c.get(a.get(i)) - 1);
@@ -43,8 +47,9 @@ public class Ordenacao {
         return b;
     }
 
+
     // Função de ordenação Pigeonhole Sort
-    public void ordenacaoPigeonhole(List<Integer> a) {
+    public void ordenacaoPigeonhole(Vector<Integer> a) {
         // Encontrar o valor mínimo e máximo em a
         int size = a.size();
         int minimum = a.get(0);
@@ -63,7 +68,7 @@ public class Ordenacao {
         int holeSize = maximum - minimum + 1;
 
         // Criar os Pigeonholes
-        List<Integer> c = new ArrayList<>(holeSize);
+        Vector<Integer> c = new Vector<>(holeSize);
         for (int i = 0; i < holeSize; i++) {
             c.add(0);
         }
@@ -82,7 +87,7 @@ public class Ordenacao {
     }
 
     // Função para ordenar e medir tempos em nanossegundos
-    public List<Integer> ordenar(List<Integer> a) {
+    public Vector<Integer> ordenar(Vector<Integer> a) {
         // Medição do tempo para ordenacaoCounting
         long start, end;
         double tempoCoun = 0.0;
@@ -90,10 +95,12 @@ public class Ordenacao {
 
         for (int i = 0; i < numIteracoes; i++) {
             start = System.nanoTime();
-            ordenacaoCounting(new ArrayList<>(a)); // Copia para não modificar a lista original
+            ordenacaoCounting(new Vector<>(a)); // Copia para não modificar o vector original
             end = System.nanoTime();
             tempoCoun += ((double) (end - start)) / 1_000_000; // Convertendo para milissegundos
         }
+
+
         tempoCoun /= numIteracoes;
         tempoCoun *= 1_000_000; // Convertendo para nanossegundos
 
@@ -101,20 +108,19 @@ public class Ordenacao {
         double tempoHole = 0.0;
         for (int i = 0; i < numIteracoes; i++) {
             start = System.nanoTime();
-            ordenacaoPigeonhole(new ArrayList<>(a)); // Copia para não modificar a lista original
+            ordenacaoPigeonhole(new Vector<>(a)); // Copia para não modificar o vector original
             end = System.nanoTime();
             tempoHole += ((double) (end - start)) / 1_000_000; // Convertendo para milissegundos
         }
         tempoHole /= numIteracoes;
         tempoHole *= 1_000_000; // Convertendo para nanossegundos
 
-        // Criando uma lista para armazenar os tempos em formato inteiro
-        List<Integer> tempos = new ArrayList<>();
+        // Criando um vector para armazenar os tempos em formato inteiro
+        Vector<Integer> tempos = new Vector<>();
         tempos.add((int) tempoCoun);
         tempos.add((int) tempoHole);
 
         return tempos;
     }
 
-    
 }

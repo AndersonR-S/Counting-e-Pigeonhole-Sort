@@ -3,21 +3,20 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
-public class CSV {
+public class Csv {
     
-    public CSV() {
+    public Csv() {
         // Construtor vazio
     }
 
-    public List<Integer> readCSV(String filename) {
+    public Vector<Integer> readCSV(String filename) {
         System.out.println(filename);
 
-        List<Integer> numbers = new ArrayList<>();
+        Vector<Integer> numbers = new Vector<>();
         boolean firstLine = true;
-
+        
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -33,11 +32,10 @@ public class CSV {
             System.err.println("Erro ao ler o arquivo CSV: " + e.getMessage());
             System.exit(1);
         }
-
         return numbers;
     }
 
-    public void writeCSV(String filename, List<Integer> newData) {
+    public void writeCSV(String filename, Vector<Integer> newData) {
         // Exibe os novos dados no console
         System.out.print("Novos dados: ");
         for (int num : newData) {
@@ -46,7 +44,7 @@ public class CSV {
         System.out.println("\n--------------------------");
 
         // Armazena as linhas do arquivo CSV em uma lista de strings
-        List<String> lines = new ArrayList<>();
+        Vector<String> lines = new Vector<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -70,14 +68,19 @@ public class CSV {
             for (int i = 1; i < lines.size(); ++i) {
                 contador = 0;
                 for (int j = 0; j < lines.get(i).length(); ++j) {
-                    if (lines.get(i).charAt(j) == ',' && contador == 4) {
-                        bw.write("," + newData.get(i - 1) + "\n");
-                        break;
+                    if(contador > 4 && lines.get(i).charAt(j) != ','){
+                        continue;
+                    }
+                    else if (lines.get(i).charAt(j) == ',' && contador == 4) {
+                        bw.write("," + newData.get(i - 1));
+                        contador++;
+                        continue;
                     } else if (lines.get(i).charAt(j) == ',') {
                         contador++;
                     }
                     bw.write(lines.get(i).charAt(j));
                 }
+                bw.write("\n");
             }
         } catch (IOException e) {
             System.err.println("Erro ao abrir o arquivo " + filename + " para escrita.");
