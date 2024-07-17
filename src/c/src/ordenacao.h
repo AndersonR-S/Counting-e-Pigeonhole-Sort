@@ -8,13 +8,13 @@
 #include <string.h>
 
 // Função de ordenação Counting Sort
-int* ordenacaoCounting(int *a);
+int* ordenacaoCounting(int *a, int size);
 
 // Função de ordenação Pigeonhole Sort
-int* ordenacaoPigeonhole(int *a);
+int* ordenacaoPigeonhole(int *a, int size);
 
 // Função para ordenar e medir tempos em nanossegundos
-int* ordenar(int *a);
+int* ordenar(int *a, int size);
 
 
 #endif

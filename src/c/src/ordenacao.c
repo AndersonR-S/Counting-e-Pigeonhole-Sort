@@ -1,9 +1,7 @@
 #include "ordenacao.h"
 
-// Função de ordenação Counting Sort
-int* ordenacaoCounting(int *a) {
+int* ordenacaoCounting(int *a, int size) {
     // Encontrar o valor máximo em a
-    int size = sizeof(a);
     int maxA = 0;
     for (int i = 0; i < size; i++) {
         if (a[i] > maxA) {
@@ -13,6 +11,11 @@ int* ordenacaoCounting(int *a) {
     
     // Passo 1: Contagem das ocorrências dos elementos
     int *c = (int*)malloc((maxA + 1) * sizeof(int));
+    if (c == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para c\n");
+        return NULL;
+    }
+    
     for (int i = 0; i <= maxA; i++) {
         c[i] = 0;
     }
@@ -27,19 +30,25 @@ int* ordenacaoCounting(int *a) {
 
     // Passo 3: Construção do array ordenado
     int *b = (int*)malloc(size * sizeof(int));
+    if (b == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para b\n");
+        free(c);
+        return NULL;
+    }
+    
     for (int i = size - 1; i >= 0; i--) {
         b[c[a[i]] - 1] = a[i];
         c[a[i]]--;
     }
 
     free(c);
+
     return b;
 }
 
 // Função de ordenação Pigeonhole Sort
-int* ordenacaoPigeonhole(int *a) {
+int* ordenacaoPigeonhole(int *a,int size) {
     // Encontrar o valor mínimo e máximo em a
-    int size = sizeof(a);
     int minimum = a[0];
     int maximum = a[0];
     for (int i = 1; i < size; i++) {
@@ -76,7 +85,7 @@ int* ordenacaoPigeonhole(int *a) {
     return a;
 }
 
-int* ordenar(int *a) {
+int* ordenar(int *a, int size) {
     clock_t start, end;
     double tempo_coun = 0.0, tempo_hole = 0.0;
     const int numIteracoes = 10;
@@ -84,7 +93,7 @@ int* ordenar(int *a) {
     // Medição do tempo para ordenacaoCounting
     for (int i = 0; i < numIteracoes; i++) {
         start = clock();
-        ordenacaoCounting(a);
+        ordenacaoCounting(a,size);
         end = clock();
         tempo_coun += ((double)(end - start)) / CLOCKS_PER_SEC;
     }
@@ -94,7 +103,7 @@ int* ordenar(int *a) {
     // Medição do tempo para ordenacaoPigeonhole
     for (int i = 0; i < numIteracoes; i++) {
         start = clock();
-        ordenacaoPigeonhole(a);
+        ordenacaoPigeonhole(a,size);
         end = clock();
         tempo_hole += ((double)(end - start)) / CLOCKS_PER_SEC;
     }

@@ -4,13 +4,14 @@
 
 int main() {
 
-    int *input = readCSV("../../dataset/input.csv");
+    int size;
+    int *input = readCSV("../../dataset/input.csv", &size);
 
-    int *tempo_de = ordenar(input); //  Desordenado
+    int *tempo_de = ordenar(input, size); //  Desordenado
+    
+    //o input ja vem ordenado no Desordenado
 
-    input = ordenacaoPigeonhole(input);
-
-    int *tempo_or = ordenar(input);// Ordenado
+    int *tempo_or = ordenar(input, size);// Ordenado
 
     int *tempo = (int *)malloc(4 *sizeof(int *));
     for(int i = 0; i < 2; i++){

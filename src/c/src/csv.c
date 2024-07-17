@@ -3,7 +3,7 @@
 #define MAX_LINE_LENGTH 100
 
 // Função para ler um arquivo CSV
-int* readCSV(const char *filename) {
+int* readCSV(const char *filename, int *size) {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
         fprintf(stderr, "Erro ao abrir o arquivo %s.\n", filename);
@@ -54,7 +54,7 @@ int* readCSV(const char *filename) {
             }
         }
     }
-
+    size[0]=count;
     fclose(file);
     return numbers;
 }

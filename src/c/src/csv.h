@@ -10,7 +10,7 @@
 
 
 
-int* readCSV(const char *filename);
+int* readCSV(const char *filename, int *size);
 
 void writeCSV(const char *filename, int data[]);
 

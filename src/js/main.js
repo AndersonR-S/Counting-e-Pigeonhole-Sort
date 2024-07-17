@@ -5,13 +5,14 @@ async function main() {
     try {
         // Leitura do arquivo CSV
         const input = await csv.readCSV('./dataset/input.csv'); // Lê os números do CSV
-        console.log('Input lido:', input);
+        console.log('Input lido 1:', input);
 
         // Ordenação dos números desordenados
         let tempos_de = (await ordenacao.ordenar(input));
 
         // Ordenação dos números ordenados
-        const sortedInput = [...input].sort((a, b) => a - b); // Ordena uma cópia
+        const sortedInput = ordenacao.ordenacaoCounting(input); // Ordena uma cópia
+
         let tempos_or = (await ordenacao.ordenar(sortedInput));
 
         let tempos = tempos_de;

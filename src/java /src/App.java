@@ -12,6 +12,7 @@ public class App {
             System.out.println("Nenhum dado encontrado no arquivo CSV.");
             return; // Saída do programa
         }
+
         // Ordenação desordenada usando a função ordenar da classe Ordenacao
         Vector<Integer> tempo_de = ordenacao.ordenar(new Vector<>(input));
 

@@ -4,10 +4,10 @@ require_once 'csv.php';
 
 try {
     $input = readCSV('dataset/input.csv');
-    
     $tempo_de = ordenar($input); // desordenado
+    
+    $input = ordenacaoCounting($input); //ordenar de ordem crescente
 
-    $input = ordenacaoPigeonhole($input); //ordenar de ordem crescente
     $tempo_or = ordenar($input);// ordenado
 
     $tempo = array_merge($tempo_de, $tempo_or);

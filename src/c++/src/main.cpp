@@ -9,14 +9,12 @@ int main() {
 
     // Leitura do arquivo CSV de entrada
     std::vector<int>input = csv.readCSV("../../dataset/input.csv");
-
     
     // Ordenação desordenada usando a função ordenar da classe Ordenacao
     std::vector<int> tempo_de = ordenacao.ordenar(input);
 
-    // Ordenação usando Pigeonhole Sort (assumindo que ordenacaoCounting é a função adequada)
-    input = ordenacao.ordenacaoCounting(input);    
-
+    // O input ja fica ordenado quando passa para pegar o tempo desordenado
+    
     // Ordenação dos números ordenados
     std::vector<int> tempo_or = ordenacao.ordenar(input);
 

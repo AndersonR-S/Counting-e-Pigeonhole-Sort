@@ -72,6 +72,7 @@ function ordenar(a) {
 }
 
 module.exports = {
-    ordenar: ordenar
+    ordenar: ordenar,
+    ordenacaoCounting : ordenacaoCounting
     // Outras funções, se houver
 };
