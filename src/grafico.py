@@ -3,13 +3,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-# Verifique se o diretório de destino existe, caso contrário, crie-o
-if not os.path.exists('dataget/img'):
-    os.makedirs('dataget/img')
+# Verificar se o diretório de destino existe, caso contrário, crie-o
+save_path = 'dataget/img'
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
 
-def graficos(data, title, save_path):
-    sort = ['counting','pigeonhole']
+def graficoSort(data, title, save_path):
+    sort = ['counting', 'pigeonhole']
 
+    plt.clf()  # Limpa a figura atual
     plt.figure(figsize=(10, 6))
 
     # Determinando a largura das barras e a quantidade de grupos
@@ -39,21 +41,14 @@ def graficos(data, title, save_path):
 
     # Salvando o gráfico
     save_file = os.path.join(save_path, f'{title.lower().replace(" ", "_")}_grafico.png')
-    plt.savefig(save_file)
-
-    # Exibindo o gráfico
-    plt.show()
+    plt.savefig(save_file, format='png')
+    plt.close()  # Fechar a figura após salvar
 
 
-# Read the CSV file (substitua pelo caminho do seu arquivo CSV)
-dados = pd.read_csv("dataget/output.csv")
-
-# Print the first few rows to understand the structure
-print(dados.head())
-
-# Caminho para salvar os gráficos
-save_path = 'dataget/img'
+# Leitura do arquivo CSV (substitua pelo caminho do seu arquivo CSV)
+dados = pd.read_csv("dataget/output.csv",index_col=0)
 
 # Plotando gráficos para desordenado e ordenado
-graficos(dados.iloc[:-2], 'Desordenado', save_path)
-graficos(dados.iloc[2:], 'Ordenado', save_path)
+graficoSort(dados.iloc[:-2], 'Desordenado', save_path)
+graficoSort(dados.iloc[2:], 'Ordenado', save_path)
+
