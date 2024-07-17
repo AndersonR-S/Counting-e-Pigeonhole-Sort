@@ -62,6 +62,6 @@ def ordenar(a):
 
     tempo_hole = tempo_hole /10
 
-    return [tempo_coun, tempo_hole]
+    return [int(tempo_coun), int(tempo_hole)]
     
 

@@ -70,3 +70,8 @@ function ordenar(a) {
 
     return [tempo_coun.toString(), tempo_hole.toString()];
 }
+
+module.exports = {
+    ordenar: ordenar
+    // Outras funções, se houver
+};
