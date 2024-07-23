@@ -3,7 +3,42 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-def gerarGraficos(dados_coun, data, headhead,tible, save_path):
+def gerarGraficosK(dados, data, head, tible, save_path):
+    os.makedirs(save_path, exist_ok=True)
+    
+    plt.figure(figsize=(10, 6))
+    
+    x = [int(d[0]) for d in data]
+    
+    for i, linguagem in enumerate(head):
+        y = dados[i]
+        
+        # Verifica se y é uma lista
+        if not isinstance(y, list):
+            print(f"Aviso: y não é uma lista para {linguagem}. Dados: {y}")
+            continue
+        
+        # Verifica se x e y têm o mesmo comprimento
+        if len(x) != len(y):
+            print(f"Aviso: x e y têm tamanhos diferentes para {linguagem}.")
+            print(f"x: {len(x)} elementos")
+            print(f"y: {len(y)} elementos")
+            continue
+        
+        plt.plot(x, y, label=linguagem)
+    
+    plt.xlabel('Valor X (data[0])')
+    plt.ylabel('Valores')
+    plt.title(tible)
+    plt.legend()
+    
+    # plt.savefig(f'{save_path}/{titulo}.png', format='png')
+    save_file = os.path.join(save_path, f'{tible.lower().replace(" ", "_")}_grafico.png')
+    plt.savefig(save_file, format='png')
+
+
+
+def gerarGraficosN(dados_coun, data, headhead,tible, save_path):
     os.makedirs(save_path, exist_ok=True)
     plt.figure(figsize=(12, 8))
 
@@ -81,8 +116,8 @@ def graficoComparacaoN(data, diretoria, save_path):
     for line in dados_linguagem_hole:
         print(line)
 
-    gerarGraficos(dados_linguagem_coun, data, head,f'Counting N = {data[0][0]} K = x', f'{save_path}/graphComparar')
-    gerarGraficos(dados_linguagem_hole, data, head,f'Pigeonhole N = {data[0][0]} K = x', f'{save_path}/graphComparar')
+    gerarGraficosN(dados_linguagem_coun, data, head,f'Counting N = {data[0][0]} K = x', f'{save_path}/graphComparar')
+    gerarGraficosN(dados_linguagem_hole, data, head,f'Pigeonhole N = {data[0][0]} K = x', f'{save_path}/graphComparar')
 
 
 
@@ -135,5 +170,5 @@ def graficoComparacaoK(data, diretorio, save_path):
         print(line)
     
 
-    gerarGraficos(dados_linguagem_coun, data, head, f'Counting N = x   K = {data[0][1]}', f'{save_path}/graphComparar')
-    gerarGraficos(dados_linguagem_hole, data, head, f'Pigeonhole N = x   k = {data[0][1]}', f'{save_path}/graphComparar')
+    gerarGraficosK(dados_linguagem_coun, data, head, f'Counting N = x   K = {data[0][1]}', f'{save_path}/graphComparar')
+    gerarGraficosK(dados_linguagem_hole, data, head, f'Pigeonhole N = x   k = {data[0][1]}', f'{save_path}/graphComparar')
