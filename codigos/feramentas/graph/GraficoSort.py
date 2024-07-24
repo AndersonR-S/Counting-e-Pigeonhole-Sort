@@ -1,11 +1,11 @@
+import os
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 
 def graficoSort(data, title, save_path):
     sort = ['counting', 'pigeonhole']
 
-    plt.clf()  
+    plt.clf()
     plt.figure(figsize=(10, 6))
 
     num_linhas = len(data)
@@ -15,7 +15,6 @@ def graficoSort(data, title, save_path):
     for i, (indice, linha) in enumerate(data.iterrows()):
         posicao_ticks = indices + largura_barra * (i - (num_linhas - 1) / 2)
         plt.bar(posicao_ticks, linha, width=largura_barra, label=f'{sort[i]}')
-
 
     plt.title(f'Representação em {title}')
     plt.xlabel('Variação de Códigos')
@@ -28,5 +27,4 @@ def graficoSort(data, title, save_path):
 
     save_file = os.path.join(save_path, f'{title.lower().replace(" ", "_")}_grafico.png')
     plt.savefig(save_file, format='png')
-    plt.close()  
-
+    plt.close()

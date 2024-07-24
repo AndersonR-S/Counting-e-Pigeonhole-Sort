@@ -67,7 +67,6 @@ def gerarGraficosN(dados_coun, data, headhead,tible, save_path):
     plt.savefig(save_file, format='png')
 
 
-
 def graficoComparacaoN(data, diretoria, save_path):
     # Ordena a lista de dados em relação a primeira posição
     data = sorted(data, key=lambda x: (int(x[0]), int(x[1])))
