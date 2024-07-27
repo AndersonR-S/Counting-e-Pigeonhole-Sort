@@ -85,9 +85,9 @@ Vale ressaltar, que as pastas getdatas e setdatas, são responsáveis por guarda
 
 ###  Funcionamento do código
 
-    1 - O usuário, primeiramente, executará o arquivo mainGerador.py para obter os números.
+1 - O usuário, primeiramente, executará o arquivo mainGerador.py para obter os números.
 
-    2 - Executará os "main" das 6 linguagens. 
+2 - Executará os "main" das 6 linguagens. 
 
 Para a execução as linguagem c e c++, há o arquivo MakeFile dos expectativas linguagens, e logo abaixo têm os comandos execução do MakeFile.
 
@@ -101,7 +101,7 @@ Para as outras linguagens, há a necessidade de instalar extensões para a execu
 
 Séria ideal fazer as etapas 1 e 2 várias vezes, no intuito de obter mais dados para gerar gráficos mais complexos.
 
-    3 - Logo apos de executar os mains, irá para a pasta "ferramentas" e executará o "mainGaph.py" para obter os gráficos, que será salvo na pasta "img" do "datagets".
+3 - Logo apos de executar os mains, irá para a pasta "ferramentas" e executará o "mainGaph.py" para obter os gráficos, que será salvo na pasta "img" do "datagets".
 
 
 Na pasta "img", gerará dois tipos de gráficos os individuais e as relacionadas.
