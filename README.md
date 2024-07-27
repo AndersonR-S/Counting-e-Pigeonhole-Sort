@@ -1,5 +1,9 @@
 <div align = "center" >
     <h1 >Seminários: Métodos de Ordenação </h1>
+    Anderson Rodrigues dos Santos </br>
+    Humberto Henrique Cunha</br>
+    Kauã Lucas de Jesus Silva</br>
+    Algoritmos e Estrutura de Dados I
 
 </div>
 
